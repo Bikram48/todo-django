@@ -6,7 +6,6 @@ from .models import *
 def create_task(request):
 
     form = TaskForm()
-    task = Task()
 
     if request.method == 'POST':
         form = TaskForm(request.POST)
@@ -29,3 +28,20 @@ def view_tasks(request):
     }
 
     return render(request, "all_tasks.html", context)
+
+def update_task(request, id):
+
+    task = Task.objects.get(id=id)
+
+    form = TaskForm(instance=task)
+    if(request.method == 'POST'):
+        form = TaskForm(request.POST, instance=task)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/tasks')
+
+    context = {
+       "form": form
+    }
+    return render(request, "task_form.html", context=context)
