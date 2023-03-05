@@ -1,0 +1,33 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Logs
+*.log
+logs/
+*.pid
+*.coverage
+
+# Media files
+media/
+uploads/
+
+# Static files
+staticfiles/
+node_modules/
+.babelrc
+
+# Environment variables
+.env
+venv/
+*.env
+
+# Database
+*.db
+*.sqlite3
+
+# Other
+.DS_Store
+*.swp
+Thumbs.db
