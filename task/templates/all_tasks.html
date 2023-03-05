@@ -4,7 +4,7 @@
 
 {% for task in tasks %}
 <ul>
-    <li>{{task}}  <a href="{% url 'update_task' task.id %}">Update</a> <a href="">Remove</a></li>
+    <li>{{task}}  <a href="{% url 'update_task' task.id %}">Update</a> <a href="{% url 'delete_task' task.id %}">Remove</a></li>
 </ul>
 {% endfor %}
 {% endblock %}

@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', create_task),
     path('tasks/', view_tasks, name="tasks"),
-    path('update/<int:id>', update_task, name="update_task")
+    path('update/<int:id>', update_task, name="update_task"),
+    path('delete/<int:id>', remove_task, name="delete_task"),
 ]
