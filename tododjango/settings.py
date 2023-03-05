@@ -54,7 +54,9 @@ ROOT_URLCONF = 'tododjango.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            "/Users/bikram/Dev/todo-django/task/templates"
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
