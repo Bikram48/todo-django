@@ -23,5 +23,6 @@ urlpatterns = [
     path('tasks/', view_tasks, name="tasks"),
     path('update/<int:id>', update_task, name="update_task"),
     path('delete/<int:id>', remove_task, name="delete_task"),
-    path('register/', register_user, name='register')
+    path('register/', register_user, name='register'),
+    path('login/', signin_user, name='login')
 ]

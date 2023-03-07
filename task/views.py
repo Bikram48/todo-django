@@ -20,6 +20,14 @@ def register_user(request):
 
     return render(request, "register.html", context)
 
+def signin_user(request):
+    
+    context = {
+
+    }
+
+    return render(request, "login.html", context)
+
 def create_task(request):
 
     form = TaskForm()
