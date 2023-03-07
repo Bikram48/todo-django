@@ -3,6 +3,12 @@ from .forms import TaskForm
 from .models import *
 
 # Create your views here.
+def register_user(request):
+    context = {
+       
+    }
+    return render(request, "register.html", context)
+
 def create_task(request):
 
     form = TaskForm()
