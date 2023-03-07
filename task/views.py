@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import TaskForm, CreateUserForm
 from .models import *
@@ -37,6 +37,11 @@ def signin_user(request):
             messages.info(request, "username or password doesn't exist")
 
     return render(request, "login.html", {})
+
+def logout_user(request):
+    logout(request)
+    messages.success(request, "You successfully logged out")
+    return redirect('login')
 
 def create_task(request):
 
