@@ -1,15 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
-from .forms import TaskForm
+from .forms import TaskForm, CreateUserForm
 from .models import *
 
 # Create your views here.
 def register_user(request):
 
-    form = UserCreationForm()
+    form = CreateUserForm()
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CreateUserForm(request.POST)
 
         if form.is_valid():
             form.save()
