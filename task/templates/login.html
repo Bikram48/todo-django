@@ -1,5 +1,10 @@
 <h3>Login</h3>
 <form action="" method="POST">
     {% csrf_token %}
-    <input type="submit" value="LOGIN">
+    <input type="text" name="username" placeholder="Enter Username" /><br><br>
+    <input type="password" name="password" placeholder="Enter Password" /><br><br>
+    <input type="submit" value="LOGIN" />
+    {% for message in messages %}
+        {{message}}
+    {% endfor %}
 </form>
