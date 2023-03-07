@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import TaskForm, CreateUserForm
 from .models import *
@@ -8,33 +9,38 @@ from .models import *
 # Create your views here.
 def register_user(request):
 
-    form = CreateUserForm()
+    if request.user.is_authenticated:
+        return redirect('add_task')
+    else:
+        form = CreateUserForm()
 
-    if request.method == 'POST':
-        form = CreateUserForm(request.POST)
+        if request.method == 'POST':
+            form = CreateUserForm(request.POST)
 
-        if form.is_valid():
-            form.save()
+            if form.is_valid():
+                form.save()
 
-    context = {
-        "form": form
-    }
+        context = {
+            "form": form
+        }
 
     return render(request, "register.html", context)
 
 def signin_user(request):
-    
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+    if request.user.is_authenticated:
+        return redirect('add_task')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
 
-        user = authenticate(request, username=username, password=password)
+            user = authenticate(request, username=username, password=password)
 
-        if user is not None:
-            login(request, user)
-            return redirect('add_task')
-        else:
-            messages.info(request, "username or password doesn't exist")
+            if user is not None:
+                login(request, user)
+                return redirect('add_task')
+            else:
+                messages.info(request, "username or password doesn't exist")
 
     return render(request, "login.html", {})
 
@@ -43,6 +49,7 @@ def logout_user(request):
     messages.success(request, "You successfully logged out")
     return redirect('login')
 
+@login_required(login_url='login')
 def create_task(request):
 
     form = TaskForm()
@@ -59,6 +66,7 @@ def create_task(request):
 
     return render(request, "task_form.html", context=context)
 
+@login_required(login_url='login')
 def view_tasks(request):
 
     task = Task.objects.all()
@@ -69,6 +77,7 @@ def view_tasks(request):
 
     return render(request, "all_tasks.html", context)
 
+@login_required(login_url='login')
 def update_task(request, id):
 
     task = Task.objects.get(id=id)
@@ -86,6 +95,7 @@ def update_task(request, id):
     }
     return render(request, "task_form.html", context=context)
 
+@login_required(login_url='login')
 def remove_task(request, id):
     
     task = Task.objects.get(id=id)
